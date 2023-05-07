@@ -30,13 +30,17 @@ fun WaifusScreen() {
     val waifusService = ApiClient.getWaifuService()
     val fetchWaifus = waifusService.fetchWaifus()
 
+
     fetchWaifus.enqueue(object : Callback<WaifuResponse> {
         override fun onResponse(
             call: Call<WaifuResponse>,
             response: Response<WaifuResponse>
         ) {
             if (response.isSuccessful) {
-                waifus.value = response.body()!!.waifus
+                waifus.value = response.body()!!.images
+            }
+            else {
+                Log.e("Waifus", "Error fetching waifus: ${response.errorBody()}")
             }
         }
 
@@ -44,7 +48,9 @@ fun WaifusScreen() {
             Log.e("Waifus", "Error fetching waifus", t)
         }
     })
-    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+
+    //Text(text = waifus.value.toString())
+   LazyVerticalGrid(columns = GridCells.Fixed(2)) {
         items(waifus.value) {
             WaifuCard(it)
         }
