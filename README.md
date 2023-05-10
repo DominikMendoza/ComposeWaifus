@@ -50,6 +50,11 @@ implementation "io.coil-kt:coil-compose:$coil_version"
 def room_version = "2.5.1"
 implementation "androidx.room:room-runtime:$room_version"
 kapt "androidx.room:room-compiler:$room_version"
+
+// navigation
+def nav_version = "2.5.3"
+implementation "androidx.navigation:navigation-compose:$nav_version"
+
 ```
 
 ### Agregar los permisos en AndroidManifest.xml 
